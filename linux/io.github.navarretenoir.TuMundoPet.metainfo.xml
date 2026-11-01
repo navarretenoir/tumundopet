@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>cl.kotone.TuMundoPet</id>
+  <id>io.github.navarretenoir.TuMundoPet</id>
   <name>Tu Mundo Pet</name>
   <summary>Tienda Tu Mundo Pet: acuarismo y productos premium de mascotas</summary>
+  <summary xml:lang="en">App of Tienda Tu Mundo Pet, aquarium and premium pet products store in Chile</summary>
   <developer id="cl.javieranavarrete"><name>Javiera Navarrete</name></developer>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
@@ -10,8 +11,12 @@
     <p>La tienda Tu Mundo Pet (tiendatumundopet.cl) en su propia ventana: catálogo, carrito y compra con las pasarelas
        chilenas (tarjeta, Mercado Pago, Flow, transferencia). El carrito y la sesión se conservan entre usos.</p>
     <p>Desarrollado por Javiera Navarrete.</p>
+    <p xml:lang="en">The app of Tienda Tu Mundo Pet (tiendatumundopet.cl), an aquarium and premium pet products store in Chile: catalog, cart and checkout with Chilean payment methods. Developed by Javiera Navarrete for Tienda Tu Mundo Pet.</p>
   </description>
-  <launchable type="desktop-id">cl.kotone.TuMundoPet.desktop</launchable>
+  <url type="homepage">https://github.com/navarretenoir/tumundopet</url>
+  <url type="vcs-browser">https://gitlab.com/navarretenoir/tumundopet</url>
+  <url type="bugtracker">https://gitlab.com/navarretenoir/tumundopet/-/issues</url>
+  <launchable type="desktop-id">io.github.navarretenoir.TuMundoPet.desktop</launchable>
   <provides><binary>tumundopet</binary></provides>
   <content_rating type="oars-1.1"/>
   <releases><release version="1.0" date="2026-10-31"/></releases>
