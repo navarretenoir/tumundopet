@@ -16,6 +16,10 @@
   <url type="homepage">https://github.com/navarretenoir/tumundopet</url>
   <url type="vcs-browser">https://gitlab.com/navarretenoir/tumundopet</url>
   <url type="bugtracker">https://gitlab.com/navarretenoir/tumundopet/-/issues</url>
+  <screenshots>
+    <screenshot type="default"><image>https://raw.githubusercontent.com/navarretenoir/tumundopet/main/screenshots/1.png</image></screenshot>
+    <screenshot><image>https://raw.githubusercontent.com/navarretenoir/tumundopet/main/screenshots/2.png</image></screenshot>
+  </screenshots>
   <launchable type="desktop-id">io.github.navarretenoir.TuMundoPet.desktop</launchable>
   <provides><binary>tumundopet</binary></provides>
   <content_rating type="oars-1.1"/>
