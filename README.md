@@ -20,3 +20,19 @@ El nombre, el logo y el contenido de la tienda pertenecen a Tienda Tu Mundo Pet 
 | `apple/` | macOS (Intel y Apple Silicon) e iOS/iPadOS | `xcodegen generate` dentro de `apple/` (también lo compila el flujo de GitHub Actions) |
 
 Las piezas de terceros de los kits se bajan aparte: ver `herramientas/LEEME.md`.
+
+
+---
+
+## English
+
+The app of **[Tienda Tu Mundo Pet](https://www.tiendatumundopet.cl)**, an aquarium and premium pet products store in Chile. It opens
+the store in its own window, with catalog, cart and checkout using Chilean payment methods (card, Mercado Pago, Flow and bank
+transfer). Cart and session persist between uses; WhatsApp, social networks, maps, phone and e-mail open in the corresponding system
+app. No ads or trackers of its own.
+
+Platforms: Android 5.0+, Linux (RPM, DEB, AppImage, Flatpak, Snap), Windows 10/11 (and 7/8.1 with WebView2), macOS (Intel and Apple
+Silicon) and iOS/iPadOS. The interface is in Spanish (Chile).
+
+**Developed by Javiera Navarrete for Tienda Tu Mundo Pet** · Code under [GPL-3.0-or-later](LICENSE). The store's name, logo and
+content belong to Tienda Tu Mundo Pet and are not covered by the code license.
