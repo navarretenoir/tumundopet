@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Tu Mundo Pet
+Comment=Tienda Tu Mundo Pet: acuarismo y productos premium de mascotas
+Exec=tumundopet
+Icon=cl.kotone.TuMundoPet
+Terminal=false
+Categories=Network;GTK;
+Keywords=mascotas;tienda;acuario;acuarismo;peces;perro;gato;tumundopet;
+StartupWMClass=cl.kotone.TuMundoPet
+StartupNotify=true
+X-Developer=Javiera Navarrete

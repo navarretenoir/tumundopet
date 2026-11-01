@@ -1,0 +1,9 @@
+La app de Tienda Tu Mundo Pet (tiendatumundopet.cl), tienda de acuarismo y productos premium de mascotas.
+
+• Catálogo completo, carrito y compra dentro de la app.
+• Medios de pago chilenos: tarjeta, Mercado Pago, Flow y transferencia.
+• El carrito y la sesión se conservan entre usos.
+• WhatsApp, redes, mapas, teléfono y correo se abren en la app que corresponde.
+• Funciona desde Android 5.0.
+
+Desarrollado por Javiera Navarrete.
