@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+D = $(CURDIR)/debian/tumundopet
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	make -C desktop EXTRA_CFLAGS="$(shell dpkg-buildflags --get CFLAGS) $(shell dpkg-buildflags --get CPPFLAGS) $(shell dpkg-buildflags --get LDFLAGS)"
+
+override_dh_auto_install:
+	install -Dm755 desktop/tumundopet "$(D)/usr/bin/tumundopet"
+	install -Dm644 linux/io.github.navarretenoir.TuMundoPet.desktop "$(D)/usr/share/applications/io.github.navarretenoir.TuMundoPet.desktop"
+	install -Dm644 linux/io.github.navarretenoir.TuMundoPet.metainfo.xml "$(D)/usr/share/metainfo/io.github.navarretenoir.TuMundoPet.metainfo.xml"
+	install -Dm644 linux/io.github.navarretenoir.TuMundoPet.svg "$(D)/usr/share/icons/hicolor/scalable/apps/io.github.navarretenoir.TuMundoPet.svg"
+
+override_dh_auto_clean:
+	-$(MAKE) -C desktop clean

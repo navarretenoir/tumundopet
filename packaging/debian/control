@@ -1,0 +1,16 @@
+Source: tumundopet
+Section: utils
+Priority: optional
+Maintainer: Javiera Navarrete <navarrete.noir@gmail.com>
+Build-Depends: debhelper-compat (= 13), pkgconf, libgtk-4-dev, libwebkitgtk-6.0-dev
+Standards-Version: 4.7.0
+Homepage: https://github.com/navarretenoir/tumundopet
+Rules-Requires-Root: no
+
+Package: tumundopet
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Tu Mundo Pet store: aquariums and premium pet products
+ The Tu Mundo Pet online store (Chile) in its own window: catalogue, cart and
+ checkout with Chilean payment gateways. Cart and session are kept; WhatsApp
+ and social links open in the browser. Interface in Spanish.
