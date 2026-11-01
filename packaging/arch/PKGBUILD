@@ -1,6 +1,6 @@
 # Maintainer: Javiera Navarrete <navarrete.noir@gmail.com>
 pkgname=tumundopet
-pkgver=1.0.1
+pkgver=1.0.2
 pkgrel=1
 pkgdesc="Tienda Tu Mundo Pet: acuarismo y productos premium de mascotas"
 arch=('x86_64')

@@ -54,7 +54,46 @@ static gboolean on_tecla (GtkEventControllerKey *k, guint kv, guint kc, GdkModif
     (void) k; (void) kc;
     if (kv == GDK_KEY_F5 || ((m & GDK_CONTROL_MASK) && kv == GDK_KEY_r)) { webkit_web_view_reload (v); return TRUE; }
     if ((m & GDK_ALT_MASK) && kv == GDK_KEY_Left) { webkit_web_view_go_back (v); return TRUE; }
+    if ((m & GDK_CONTROL_MASK) && (kv == GDK_KEY_plus || kv == GDK_KEY_equal || kv == GDK_KEY_KP_Add)) { webkit_web_view_set_zoom_level (v, webkit_web_view_get_zoom_level (v) + 0.1); return TRUE; }
+    if ((m & GDK_CONTROL_MASK) && (kv == GDK_KEY_minus || kv == GDK_KEY_KP_Subtract)) { webkit_web_view_set_zoom_level (v, webkit_web_view_get_zoom_level (v) - 0.1); return TRUE; }
+    if ((m & GDK_CONTROL_MASK) && (kv == GDK_KEY_0 || kv == GDK_KEY_KP_0)) { webkit_web_view_set_zoom_level (v, 1.0); return TRUE; }
+    if (kv == GDK_KEY_F11) { GtkWindow *w = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (v))); gtk_window_is_fullscreen (w) ? gtk_window_unfullscreen (w) : gtk_window_fullscreen (w); return TRUE; }
     if ((m & GDK_ALT_MASK) && kv == GDK_KEY_Home) { webkit_web_view_load_uri (v, INICIO); return TRUE; }
+    return FALSE;
+}
+
+/* Tamaño inicial según la pantalla: en una pantalla grande y horizontal la ventana nace ancha (≥ 1150 px cuando cabe), así la
+ * tienda se muestra en su versión completa de escritorio; en pantallas verticales o pequeñas, la versión compacta. */
+static void tam_inicial (GdkDisplay *d, int *w, int *h) {
+    GListModel *ms = gdk_display_get_monitors (d);
+    GdkMonitor *m = ms ? GDK_MONITOR (g_list_model_get_item (ms, 0)) : NULL;
+    GdkRectangle g = {0, 0, 1366, 768};
+    if (m) { gdk_monitor_get_geometry (m, &g); g_object_unref (m); }
+    if (g.width >= g.height) {                        /* horizontal */
+        *w = (int) (g.width * 0.88);  if (*w > 1440) *w = 1440;
+        if (g.width >= 1280 && *w < 1150) *w = 1150;
+        *h = (int) (g.height * 0.88); if (*h > 960) *h = 960;
+    } else {                                           /* vertical (monitor girado, tableta) */
+        *w = (int) (g.width * 0.92);  if (*w > 820) *w = 820;
+        *h = (int) (g.height * 0.88);
+    }
+    if (*w < 360) *w = 360;
+    if (*h < 480) *h = 480;
+}
+
+static gchar *ruta_ventana (void) { return g_build_filename (g_get_user_config_dir (), "tumundopet", "ventana.ini", NULL); }
+
+static gboolean on_cerrar (GtkWindow *win, gpointer u) {
+    (void) u;
+    GKeyFile *kf = g_key_file_new ();
+    int w, h; gtk_window_get_default_size (win, &w, &h);
+    g_key_file_set_integer (kf, "ventana", "ancho", w);
+    g_key_file_set_integer (kf, "ventana", "alto", h);
+    g_key_file_set_boolean (kf, "ventana", "maximizada", gtk_window_is_maximized (win));
+    gchar *r = ruta_ventana (), *dir = g_path_get_dirname (r);
+    g_mkdir_with_parents (dir, 0700);
+    g_key_file_save_to_file (kf, r, NULL);
+    g_free (r); g_free (dir); g_key_file_unref (kf);
     return FALSE;
 }
 
@@ -62,7 +101,18 @@ static void activar (GtkApplication *app, gpointer u) {
     (void) u;
     GtkWidget *win = gtk_application_window_new (app);
     gtk_window_set_title (GTK_WINDOW (win), "Tu Mundo Pet");
-    gtk_window_set_default_size (GTK_WINDOW (win), 480, 860);
+    int ww, hh; tam_inicial (gdk_display_get_default (), &ww, &hh);
+    gboolean max = FALSE;
+    { GKeyFile *kf = g_key_file_new (); gchar *r = ruta_ventana ();
+      if (g_key_file_load_from_file (kf, r, G_KEY_FILE_NONE, NULL)) {
+          int a = g_key_file_get_integer (kf, "ventana", "ancho", NULL), b = g_key_file_get_integer (kf, "ventana", "alto", NULL);
+          if (a >= 360 && b >= 480) { ww = a; hh = b; }
+          max = g_key_file_get_boolean (kf, "ventana", "maximizada", NULL);
+      }
+      g_free (r); g_key_file_unref (kf); }
+    gtk_window_set_default_size (GTK_WINDOW (win), ww, hh);
+    if (max) gtk_window_maximize (GTK_WINDOW (win));
+    g_signal_connect (win, "close-request", G_CALLBACK (on_cerrar), NULL);
     /* sesión propia y persistente (carrito, inicio de sesión) en ~/.local/share/tumundopet */
     gchar *datos = g_build_filename (g_get_user_data_dir (), "tumundopet", NULL);
     gchar *cache = g_build_filename (g_get_user_cache_dir (), "tumundopet", NULL);

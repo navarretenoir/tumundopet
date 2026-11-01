@@ -246,8 +246,62 @@ static void acerca(void) {
     MessageBoxW(g_win, APP_ACERCA, L"Acerca de " APP_NOMBRE, MB_OK | MB_ICONINFORMATION);
 }
 
+#ifdef APP_ADAPTABLE
+/* Tamaño inicial según el área de trabajo del monitor: en pantallas grandes y horizontales la ventana nace ancha (>= 1150 px
+ * cuando cabe) y la tienda se ve en su versión completa de escritorio; en pantallas verticales o pequeñas, la compacta.
+ * Se recuerda el último tamaño y posición en HKCU. */
+static void tam_inicial(int *x, int *y, int *w, int *h) {
+    RECT wa;
+    int aw, ah;
+    SystemParametersInfoW(SPI_GETWORKAREA, 0, &wa, 0);
+    aw = wa.right - wa.left; ah = wa.bottom - wa.top;
+    if (aw >= ah) {
+        *w = aw * 88 / 100; if (*w > 1440) *w = 1440;
+        if (aw >= 1280 && *w < 1150) *w = 1150;
+        *h = ah * 88 / 100; if (*h > 960) *h = 960;
+    } else {
+        *w = aw * 92 / 100; if (*w > 820) *w = 820;
+        *h = ah * 88 / 100;
+    }
+    if (*w < 360) *w = 360;
+    if (*h < 480) *h = 480;
+    *x = wa.left + (aw - *w) / 2; *y = wa.top + (ah - *h) / 2;
+}
+#define CLAVE_VENTANA L"Software\\" APP_CLASE
+static void guardar_ventana(HWND h) {
+    WINDOWPLACEMENT wp; HKEY k;
+    wp.length = sizeof wp;
+    if (GetWindowPlacement(h, &wp) && RegCreateKeyExW(HKEY_CURRENT_USER, CLAVE_VENTANA, 0, NULL, 0, KEY_SET_VALUE, NULL, &k, NULL) == ERROR_SUCCESS) {
+        RegSetValueExW(k, L"Ventana", 0, REG_BINARY, (const BYTE *)&wp, sizeof wp);
+        RegCloseKey(k);
+    }
+}
+static BOOL leer_ventana(WINDOWPLACEMENT *wp) {
+    DWORD n = sizeof *wp;
+    RECT inter;
+    if (RegGetValueW(HKEY_CURRENT_USER, CLAVE_VENTANA, L"Ventana", RRF_RT_REG_BINARY, NULL, wp, &n) != ERROR_SUCCESS || n != sizeof *wp) return FALSE;
+    if (wp->length != sizeof *wp) return FALSE;
+    /* descarta posiciones que hoy quedarían fuera de todos los monitores (p. ej. se desconectó una pantalla) */
+    if (!MonitorFromRect(&wp->rcNormalPosition, MONITOR_DEFAULTTONULL)) return FALSE;
+    if (wp->rcNormalPosition.right - wp->rcNormalPosition.left < 360 || wp->rcNormalPosition.bottom - wp->rcNormalPosition.top < 480) return FALSE;
+    (void)inter;
+    if (wp->showCmd == SW_SHOWMINIMIZED) wp->showCmd = SW_SHOWNORMAL;
+    return TRUE;
+}
+#endif
+
 static LRESULT CALLBACK proc(HWND h, UINT m, WPARAM wp, LPARAM lp) {
     switch (m) {
+#ifdef APP_ADAPTABLE
+    case WM_GETMINMAXINFO: {
+        MINMAXINFO *mm = (MINMAXINFO *)lp;
+        mm->ptMinTrackSize.x = 360; mm->ptMinTrackSize.y = 480;
+        return 0;
+    }
+    case WM_CLOSE:
+        guardar_ventana(h);
+        break;
+#endif
     case WM_SIZE:
         if (g_ctrl) { RECT r; GetClientRect(h, &r); ICoreWebView2Controller_put_Bounds(g_ctrl, r); }
         return 0;
@@ -291,7 +345,17 @@ int WINAPI wWinMain(HINSTANCE inst, HINSTANCE prev, PWSTR cmd, int show) {
     wc.hIcon = LoadIconW(inst, MAKEINTRESOURCEW(1)); wc.hCursor = LoadCursorW(NULL, (LPCWSTR)IDC_ARROW);
     wc.hbrBackground = CreateSolidBrush(APP_COLOR_FONDO);
     RegisterClassW(&wc);
+#ifdef APP_ADAPTABLE
+    {
+        int x, y, w, hh;
+        WINDOWPLACEMENT lp;
+        tam_inicial(&x, &y, &w, &hh);
+        g_win = CreateWindowW(APP_CLASE, APP_NOMBRE, WS_OVERLAPPEDWINDOW, x, y, w, hh, NULL, NULL, inst, NULL);
+        if (leer_ventana(&lp)) SetWindowPlacement(g_win, &lp);
+    }
+#else
     g_win = CreateWindowW(APP_CLASE, APP_NOMBRE, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, APP_ANCHO, APP_ALTO, NULL, NULL, inst, NULL);
+#endif
     sm = GetSystemMenu(g_win, FALSE);
     AppendMenuW(sm, MF_SEPARATOR, 0, NULL);
     AppendMenuW(sm, MF_STRING, 0x0010, L"Acerca de " APP_NOMBRE L"…");

@@ -7,6 +7,7 @@
 #define APP_PUENTE          0
 #define APP_VENTANAS_DENTRO 1      /* pasarelas de pago (Webpay, Mercado Pago, Flow, 3-D Secure) en la misma ventana */
 #define APP_MENU_CONTEXTUAL TRUE
+#define APP_ADAPTABLE       1      /* tamaño según la pantalla: grande y horizontal = versión completa de escritorio */
 #define APP_ANCHO           520
 #define APP_ALTO            900
 #define APP_COLOR_FONDO     RGB(0xFF, 0xFF, 0xFF)
