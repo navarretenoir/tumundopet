@@ -7,7 +7,7 @@ redes sociales, mapas, teléfono y correo se abren en la app correspondiente del
 
 Sin publicidad ni rastreadores propios de la app.
 
-**Desarrollado por Javiera Navarrete** · Código bajo licencia [GPL-3.0-or-later](LICENSE).
+**Desarrollado por Javiera Navarrete para tienda Tu Mundo Pet** · Código bajo licencia [GPL-3.0-or-later](LICENSE).
 El nombre, el logo y el contenido de la tienda pertenecen a Tienda Tu Mundo Pet y no están cubiertos por la licencia del código.
 
 ## Plataformas
