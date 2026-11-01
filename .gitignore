@@ -1,0 +1,11 @@
+build/
+dist/
+.gradle/
+local.properties
+*.apk
+*.bak*
+herramientas/webview2
+herramientas/linux-pkg/runtime-x86_64
+herramientas/j2me/*.jar
+herramientas/j2me/proguard-7.6.1
+herramientas/j2me/bc-j2me-src

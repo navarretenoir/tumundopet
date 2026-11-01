@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>cl.kotone.TuMundoPet</id>
+  <name>Tu Mundo Pet</name>
+  <summary>Tienda Tu Mundo Pet: acuarismo y productos premium de mascotas</summary>
+  <developer id="cl.javieranavarrete"><name>Javiera Navarrete</name></developer>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <description>
+    <p>La tienda Tu Mundo Pet (tiendatumundopet.cl) en su propia ventana: catálogo, carrito y compra con las pasarelas
+       chilenas (tarjeta, Mercado Pago, Flow, transferencia). El carrito y la sesión se conservan entre usos.</p>
+    <p>Desarrollado por Javiera Navarrete.</p>
+  </description>
+  <launchable type="desktop-id">cl.kotone.TuMundoPet.desktop</launchable>
+  <provides><binary>tumundopet</binary></provides>
+  <content_rating type="oars-1.1"/>
+  <releases><release version="1.0" date="2026-10-31"/></releases>
+</component>

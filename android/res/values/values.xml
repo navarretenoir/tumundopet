@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tu Mundo Pet</string>
+    <color name="blanco">#FFFFFF</color>
+    <color name="marca">#046059</color>
+    <style name="Tienda" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/blanco</item>
+        <item name="android:statusBarColor">@color/blanco</item>
+        <item name="android:navigationBarColor">@color/blanco</item>
+        <item name="android:colorAccent">@color/marca</item>
+    </style>
+</resources>

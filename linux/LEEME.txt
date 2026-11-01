@@ -1,0 +1,9 @@
+Tu Mundo Pet para Linux — desarrollado por Javiera Navarrete.
+
+Paquetes (dist/linux):
+  · tumundopet-<v>-1.<fc>.x86_64.rpm   Fedora / RHEL / openSUSE:   sudo dnf install ./tumundopet-*.rpm
+  · tumundopet_<v>-1_amd64.deb         Debian 13 / Ubuntu 24.04+:  sudo apt install ./tumundopet_*.deb
+  · TuMundoPet-<v>-x86_64.AppImage     cualquier distro con GTK 4 y WebKitGTK 6: chmod +x y ejecutar
+  · TuMundoPet-<v>.flatpak             flatpak install --user TuMundoPet-*.flatpak   (usa org.gnome.Platform 49 de Flathub)
+  · tumundopet_<v>_amd64.snap          sudo snap install --dangerous tumundopet_*.snap (requiere gnome-46-2404)
+Se instala en /usr/bin/tumundopet con su lanzador y ficha. Comprobar integridad: sha256sum -c SHA256SUMS

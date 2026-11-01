@@ -1,0 +1,7 @@
+Tu Mundo Pet es la tienda tiendatumundopet.cl en su propia ventana: acuarismo y productos premium para tus mascotas.
+
+Características:
+  • Catálogo, carrito y compra con tarjeta, Mercado Pago, Flow o transferencia
+  • El carrito y la sesión se conservan entre usos
+  • WhatsApp y redes sociales se abren en tu navegador
+  • Funciona con Windows 10 y 11 (y 7/8.1 con Microsoft Edge WebView2)

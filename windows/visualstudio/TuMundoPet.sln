@@ -1,0 +1,19 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TuMundoPet", "TuMundoPet.vcxproj", "{8B2D3F51-6C4E-4072-9F3B-2DAE4C5F6032}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B2D3F51-6C4E-4072-9F3B-2DAE4C5F6032}.Release|Win32.ActiveCfg = Release|Win32
+		{8B2D3F51-6C4E-4072-9F3B-2DAE4C5F6032}.Release|Win32.Build.0 = Release|Win32
+		{8B2D3F51-6C4E-4072-9F3B-2DAE4C5F6032}.Release|x64.ActiveCfg = Release|x64
+		{8B2D3F51-6C4E-4072-9F3B-2DAE4C5F6032}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+EndGlobal

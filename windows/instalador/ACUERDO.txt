@@ -1,0 +1,17 @@
+ACUERDO DE USO — TU MUNDO PET
+Desarrollado por Javiera Navarrete · Versión 1.0 · 2026
+
+1. Uso. Puedes instalar y usar esta aplicación sin costo.
+
+2. Qué hace. Abre la tienda tiendatumundopet.cl en una ventana propia. Las compras, pagos y datos de despacho
+   se rigen por las condiciones de la tienda y de cada medio de pago; la aplicación no guarda ni ve los datos
+   de tu tarjeta (los pagos ocurren en las páginas seguras de las pasarelas y de tu banco).
+
+3. Privacidad. La sesión y el carrito se guardan sólo en tu equipo (%LOCALAPPDATA%\TuMundoPet). La aplicación
+   no tiene publicidad propia ni se inicia sola con Windows.
+
+4. Componentes. Usa Microsoft Edge WebView2 (incluido en Windows 10/11) y WebView2Loader.dll de Microsoft.
+
+5. Sin garantía. Se entrega «tal cual», sin garantías, en la medida que la ley lo permita.
+
+Al hacer clic en «Acepto» declaras haber leído este acuerdo.
