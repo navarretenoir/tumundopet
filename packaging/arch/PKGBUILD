@@ -1,0 +1,27 @@
+# Maintainer: Javiera Navarrete <navarrete.noir@gmail.com>
+pkgname=tumundopet
+pkgver=1.0.1
+pkgrel=1
+pkgdesc="Tienda Tu Mundo Pet: acuarismo y productos premium de mascotas"
+arch=('x86_64')
+url="https://github.com/navarretenoir/tumundopet"
+license=('GPL-3.0-or-later')
+depends=('gtk4' 'webkitgtk-6.0')
+makedepends=('gcc' 'make' 'pkgconf')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/navarretenoir/tumundopet/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')   # actualizar con updpkgsums
+
+build() {
+  cd "tumundopet-$pkgver"
+  make -C desktop EXTRA_CFLAGS="$CFLAGS $LDFLAGS"
+}
+
+package() {
+  cd "tumundopet-$pkgver"
+  local D="$pkgdir"
+  install -Dm755 desktop/tumundopet "$D/usr/bin/tumundopet"
+  install -Dm644 linux/io.github.navarretenoir.TuMundoPet.desktop "$D/usr/share/applications/io.github.navarretenoir.TuMundoPet.desktop"
+  install -Dm644 linux/io.github.navarretenoir.TuMundoPet.metainfo.xml "$D/usr/share/metainfo/io.github.navarretenoir.TuMundoPet.metainfo.xml"
+  install -Dm644 linux/io.github.navarretenoir.TuMundoPet.svg "$D/usr/share/icons/hicolor/scalable/apps/io.github.navarretenoir.TuMundoPet.svg"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
