@@ -1,0 +1,1 @@
+The app of Tienda Tu Mundo Pet (tiendatumundopet.cl), an aquarium and premium pet products store in Chile. Catalog, cart and checkout inside the app with Chilean payment methods; cart and session persist; WhatsApp, social networks, maps, phone and e-mail open in the corresponding app. Android 5.0+. Developed by Javiera Navarrete. (Interface in Spanish.)
