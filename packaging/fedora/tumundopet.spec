@@ -1,5 +1,5 @@
 Name:           tumundopet
-Version:        1.0.2
+Version:        1.1.0
 Release:        1%{?dist}
 Summary:        Tienda Tu Mundo Pet: acuarismo y productos premium de mascotas
 License:        GPL-3.0-or-later
@@ -42,5 +42,8 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/io.github
 
 
 %changelog
+* Mon Nov 02 2026 Javiera Navarrete <navarrete.noir@gmail.com> - 1.1.0-1
+- Botón flotante «TMP Calculadora» con ventana adaptativa (dosis según los litros del acuario)
+
 * Sun Nov 01 2026 Javiera Navarrete <navarrete.noir@gmail.com> - 1.0.2-1
 - Paquete inicial desde el código fuente.

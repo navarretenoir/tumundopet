@@ -172,6 +172,12 @@ static struct { void *q, *a, *r, *i; } vt_msg = {qi, addref, release, msg_invoke
 static Manejador m_msg = {&vt_msg};
 #endif
 
+#ifdef APP_FLOTANTE
+static HRESULT STDMETHODCALLTYPE guion_invoke(void *t, HRESULT e, LPCWSTR id) { (void)t; (void)e; (void)id; return S_OK; }
+static struct { void *q, *a, *r, *i; } vt_guion = {qi, addref, release, guion_invoke};
+static Manejador m_guion = {&vt_guion};
+#endif
+
 /* ------------------------------------------------------------------ creación del WebView */
 static HRESULT STDMETHODCALLTYPE ctrl_invoke(void *t, HRESULT e, ICoreWebView2Controller *ctrl) {
     RECT r;
@@ -203,6 +209,27 @@ static HRESULT STDMETHODCALLTYPE ctrl_invoke(void *t, HRESULT e, ICoreWebView2Co
         if (SUCCEEDED(ICoreWebView2_QueryInterface(g_web, &IID_WV2_3, (void **)&w3)) && w3) {
             ICoreWebView2_3_SetVirtualHostNameToFolderMapping(w3, APP_HOST_VIRTUAL, dir, COREWEBVIEW2_HOST_RESOURCE_ACCESS_KIND_DENY_CORS);
             ICoreWebView2_3_Release(w3);
+        }
+    }
+#endif
+#ifdef APP_FLOTANTE
+    {   /* botón «TMP Calculadora» + ventana adaptativa: se inyecta al crear cada documento y solo actúa en tiendatumundopet.cl */
+        WCHAR ruta[MAX_PATH];
+        HANDLE h;
+        swprintf(ruta, MAX_PATH, L"%ls\\%ls", g_dirApp, APP_FLOTANTE);
+        h = CreateFileW(ruta, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+        if (h != INVALID_HANDLE_VALUE) {
+            DWORD n = GetFileSize(h, NULL), got = 0;
+            char *b = (n > 0 && n < 4u * 1024 * 1024) ? (char *)malloc(n + 1) : NULL;
+            if (b && ReadFile(h, b, n, &got, NULL) && got > 0) {
+                int len = MultiByteToWideChar(CP_UTF8, 0, b, (int)got, NULL, 0);
+                WCHAR *w = len > 0 ? (WCHAR *)malloc(((size_t)len + 1) * sizeof(WCHAR)) : NULL;
+                if (w) {   /* WebView2 conserva el script mientras viva la vista: no se libera */
+                    MultiByteToWideChar(CP_UTF8, 0, b, (int)got, w, len); w[len] = 0;
+                    ICoreWebView2_AddScriptToExecuteOnDocumentCreated(g_web, w, (ICoreWebView2AddScriptToExecuteOnDocumentCreatedCompletedHandler *)&m_guion);
+                }
+            }
+            free(b); CloseHandle(h);
         }
     }
 #endif
