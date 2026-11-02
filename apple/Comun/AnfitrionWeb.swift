@@ -153,6 +153,11 @@ struct VistaWeb: VistaNativa {
                 ucc.addUserScript(WKUserScript(source: "window.__CLIMA_ASSETS=\(j);", injectionTime: .atDocumentStart, forMainFrameOnly: true))
             }
         }
+        // Botón «TMP Calculadora» + ventana adaptativa (web/tmp-calculadora-flotante.js): se inyecta al empezar cada documento y solo actúa en tiendatumundopet.cl
+        if let js = Bundle.main.url(forResource: "tmp-calculadora-flotante", withExtension: "js", subdirectory: "web"),
+           let src = try? String(contentsOf: js, encoding: .utf8) {
+            ucc.addUserScript(WKUserScript(source: src, injectionTime: .atDocumentStart, forMainFrameOnly: true))
+        }
         conf.userContentController = ucc
         let w = WKWebView(frame: .zero, configuration: conf)
         w.navigationDelegate = c

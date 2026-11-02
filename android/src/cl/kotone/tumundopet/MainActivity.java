@@ -39,10 +39,16 @@ public class MainActivity extends Activity {
     private WebView web;
     private ProgressBar barra;
     private boolean errorCarga = false;
+    /** Botón «TMP Calculadora» + ventana adaptativa (assets/tmp-calculadora-flotante.js): se inyecta en las páginas de la tienda. */
+    private String calculadora = "";
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override protected void onCreate(Bundle b) {
         super.onCreate(b);
+        try (java.io.InputStream in = getAssets().open("tmp-calculadora-flotante.js"); java.io.ByteArrayOutputStream o = new java.io.ByteArrayOutputStream()) {
+            byte[] buf = new byte[16384]; int n; while ((n = in.read(buf)) > 0) o.write(buf, 0, n);
+            calculadora = o.toString("UTF-8");
+        } catch (java.io.IOException e) { calculadora = ""; }
         FrameLayout raiz = new FrameLayout(this);
         raiz.setBackgroundColor(Color.WHITE);
         web = new WebView(this);
@@ -72,7 +78,7 @@ public class MainActivity extends Activity {
         s.setSupportMultipleWindows(false);                    // ventanas emergentes de pasarelas → misma vista
         s.setJavaScriptCanOpenWindowsAutomatically(true);
         s.setMediaPlaybackRequiresUserGesture(true);
-        s.setUserAgentString(s.getUserAgentString() + " TuMundoPetApp/1.0");
+        s.setUserAgentString(s.getUserAgentString() + " TuMundoPetApp/1.1");
         CookieManager.getInstance().setAcceptCookie(true);
         CookieManager.getInstance().setAcceptThirdPartyCookies(web, true);   // checkout y pasarelas
 
@@ -86,7 +92,7 @@ public class MainActivity extends Activity {
             @Override public boolean shouldOverrideUrlLoading(WebView v, WebResourceRequest r) {
                 return abrirFuera(r.getUrl());
             }
-            @Override public void onPageStarted(WebView v, String url, Bitmap f) { errorCarga = false; }
+            @Override public void onPageStarted(WebView v, String url, Bitmap f) { errorCarga = false; inyectar(v, url); }
             @Override public void onReceivedError(WebView v, WebResourceRequest r, WebResourceError e) {
                 if (r.isForMainFrame() && !errorCarga) {
                     errorCarga = true;
@@ -95,12 +101,18 @@ public class MainActivity extends Activity {
             }
             @Override public void onPageFinished(WebView v, String url) {
                 CookieManager.getInstance().flush();          // el carrito sobrevive a cerrar la app
+                inyectar(v, url);                               // por si el documento ya existía al empezar
             }
         });
 
         Uri entrada = getIntent() != null ? getIntent().getData() : null;
         if (b != null) web.restoreState(b);
         else web.loadUrl(entrada != null ? entrada.toString() : INICIO);
+    }
+
+    /** Solo en la tienda (el script se protege solo: no actúa en otros sitios ni en el pago ni dos veces). */
+    private void inyectar(WebView v, String url) {
+        if (!calculadora.isEmpty() && url != null && url.startsWith("https://www.tiendatumundopet.cl/")) v.evaluateJavascript(calculadora, null);
     }
 
     /** true = se abre fuera (otra app); false = se navega dentro. */

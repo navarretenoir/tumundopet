@@ -5,6 +5,7 @@
 #include <gtk/gtk.h>
 #include <webkit/webkit.h>
 #include <string.h>
+#include "calculadora_js.h"          /* botón «TMP Calculadora» + ventana adaptativa (se inyecta en tiendatumundopet.cl) */
 
 #define INICIO "https://www.tiendatumundopet.cl/"
 static const char *FUERA[] = {"wa.me", "whatsapp.com", "instagram.com", "facebook.com", "fb.me", "m.me", "tiktok.com",
@@ -122,7 +123,13 @@ static void activar (GtkApplication *app, gpointer u) {
     webkit_cookie_manager_set_accept_policy (webkit_network_session_get_cookie_manager (s), WEBKIT_COOKIE_POLICY_ACCEPT_ALWAYS);
     WebKitWebView *v = WEBKIT_WEB_VIEW (g_object_new (WEBKIT_TYPE_WEB_VIEW, "network-session", s, NULL));
     WebKitSettings *st = webkit_web_view_get_settings (v);
-    webkit_settings_set_user_agent_with_application_details (st, "TuMundoPetApp", "1.0");
+    webkit_settings_set_user_agent_with_application_details (st, "TuMundoPetApp", "1.1");
+    {   /* la calculadora vive en la página: se inyecta al empezar cada documento y solo actúa en tiendatumundopet.cl */
+        WebKitUserContentManager *ucm = webkit_web_view_get_user_content_manager (v);
+        WebKitUserScript *us = webkit_user_script_new (CALCULADORA_JS, WEBKIT_USER_CONTENT_INJECT_TOP_FRAME, WEBKIT_USER_SCRIPT_INJECT_AT_DOCUMENT_START, NULL, NULL);
+        webkit_user_content_manager_add_script (ucm, us);
+        webkit_user_script_unref (us);
+    }
     webkit_settings_set_hardware_acceleration_policy (st, WEBKIT_HARDWARE_ACCELERATION_POLICY_NEVER);
     g_signal_connect (v, "decide-policy", G_CALLBACK (on_decidir), NULL);
     g_signal_connect (v, "load-failed", G_CALLBACK (on_fallo), NULL);

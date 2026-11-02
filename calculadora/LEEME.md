@@ -1,0 +1,2 @@
+# TMP Calculadora flotante
+`tmp-calculadora-flotante.js` es el botón «TMP Calculadora» + ventana adaptativa que cada anfitrión (Windows, Android, Linux, macOS/iOS) inyecta en las páginas de tiendatumundopet.cl. Se genera desde el proyecto TMP Calculadora (`herramientas/construir_flotante.py`) y es un solo archivo autocontenido (los datos de 169 productos van dentro). Solo actúa en tiendatumundopet.cl y nunca en el pago (`/checkouts/`).
