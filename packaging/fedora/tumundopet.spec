@@ -1,5 +1,5 @@
 Name:           tumundopet
-Version:        1.1.0
+Version:        1.1.1
 Release:        1%{?dist}
 Summary:        Tienda Tu Mundo Pet: acuarismo y productos premium de mascotas
 License:        GPL-3.0-or-later
