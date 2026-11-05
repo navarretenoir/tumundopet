@@ -14,8 +14,8 @@
     <p xml:lang="en">The app of Tienda Tu Mundo Pet (tiendatumundopet.cl), an aquarium and premium pet products store in Chile: catalog, cart and checkout with Chilean payment methods. Developed by Javiera Navarrete for Tienda Tu Mundo Pet.</p>
   </description>
   <url type="homepage">https://github.com/navarretenoir/tumundopet</url>
-  <url type="vcs-browser">https://gitlab.com/navarretenoir/tumundopet</url>
-  <url type="bugtracker">https://gitlab.com/navarretenoir/tumundopet/-/issues</url>
+  <url type="vcs-browser">https://github.com/navarretenoir/tumundopet</url>
+  <url type="bugtracker">https://github.com/navarretenoir/tumundopet/issues</url>
   <screenshots>
     <screenshot type="default"><image>https://raw.githubusercontent.com/navarretenoir/tumundopet/main/screenshots/1.png</image></screenshot>
     <screenshot><image>https://raw.githubusercontent.com/navarretenoir/tumundopet/main/screenshots/2.png</image></screenshot>
