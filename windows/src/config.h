@@ -1,7 +1,7 @@
 /* Tu Mundo Pet para Windows — configuración del anfitrión WebView2 (webhost.c). Desarrollado por Javiera Navarrete. */
 #define APP_NOMBRE          L"Tu Mundo Pet"
 #define APP_CLASE           L"TuMundoPetJavieraNavarrete"
-#define APP_AGENTE          "TuMundoPet-Windows/1.0 (Javiera Navarrete)"
+#define APP_AGENTE          "TuMundoPet-Windows/1.2.1 (Javiera Navarrete)"
 #define APP_INICIO          L"https://www.tiendatumundopet.cl/"
 #define APP_CARPETA_DATOS   L"TuMundoPet"
 #define APP_PUENTE          0
@@ -12,7 +12,7 @@
 #define APP_ANCHO           520
 #define APP_ALTO            900
 #define APP_COLOR_FONDO     RGB(0xFF, 0xFF, 0xFF)
-#define APP_ACERCA          L"Tu Mundo Pet 1.1 para Windows\n\nDesarrollado por Javiera Navarrete.\n\n" \
+#define APP_ACERCA          L"Tu Mundo Pet 1.2.1 para Windows\n\nDesarrollado por Javiera Navarrete.\n\n" \
                             L"La tienda tiendatumundopet.cl en su propia ventana: el carrito y la sesión se conservan.\n" \
                             L"Incluye el botón «TMP Calculadora»: dosis de los productos según los litros de tu acuario.\n" \
                             L"WhatsApp, redes sociales y mapas se abren en tu navegador. F5 recarga."

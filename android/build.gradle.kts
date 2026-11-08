@@ -7,8 +7,8 @@ android {
         applicationId = "cl.kotone.tumundopet"
         minSdk = 21          // Android 5.0
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.1.1"
+        versionCode = 4
+        versionName = "1.2.1"
     }
     sourceSets["main"].apply { manifest.srcFile("AndroidManifest.xml"); java.srcDirs("src"); res.srcDirs("res"); assets.srcDirs("assets") }
     buildTypes { release { isMinifyEnabled = false } }

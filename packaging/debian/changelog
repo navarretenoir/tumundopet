@@ -1,3 +1,9 @@
+tumundopet (1.2.1-1) unstable; urgency=low
+
+  * Tu Mundo Pet 1.2.1: actualización de calculadora flotante, glosario sin desplazamiento forzado y precios en vivo.
+
+ -- Javiera Navarrete <navarrete.noir@gmail.com>  Sun, 08 Nov 2026 12:20:00 -0300
+
 tumundopet (1.1.0-1) unstable; urgency=low
 
   * Botón flotante «TMP Calculadora» con ventana adaptativa.
