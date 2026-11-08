@@ -1,5 +1,12 @@
 # Cambios / Changelog
 
+## 1.2.1
+- **Glosario**: al recorrer los términos hacia abajo, la lista ya no se devuelve al primero. / **Glossary**: scrolling down through the terms no longer jumps back to the first one.
+
+## 1.2.0
+- **Botón «Glosario»** (todas las plataformas): un segundo botón, a la derecha de «TMP Calculadora», abre el glosario de acuarismo de Tu Mundo Pet con 528 términos, buscador en vivo (sin distinguir tildes ni mayúsculas, con resaltado), índice alfabético y filtro por categoría. / **"Glosario" button** (all platforms): a second button, to the right of "TMP Calculadora", opens Tu Mundo Pet's aquarium glossary with 528 terms, live search, alphabetical index and category filter.
+- **Precios al día en la calculadora**: ahora toma los precios directamente de la tienda y se actualiza sola cuando la tienda cambia un precio; sin conexión usa los últimos conocidos. / **Up-to-date prices in the calculator**: prices now come straight from the store and refresh when the store changes a price; offline it uses the last known ones.
+
 ## 1.1.1
 - El botón «TMP Calculadora» ahora vive dentro de la barra de la tienda, justo antes de «Asesoría», y se mueve con ella: queda bien alineado y se reacomoda solo (por ejemplo, al cerrar el aviso superior o cambiar el tamaño de la ventana). En pantallas angostas pasa a mostrar solo el ícono. / The "TMP Calculadora" button now sits inside the store's bar, right before "Asesoría", and moves with it: it stays aligned and reflows by itself (e.g. when the top announcement is closed or the window is resized); on narrow screens it shows only the icon.
 
