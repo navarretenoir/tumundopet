@@ -1,5 +1,8 @@
 # Cambios / Changelog
 
+## 1.2.2
+- **Android**: los botones «TMP Calculadora» y «Glosario» aparecen solo en el inicio de la tienda; ya no se muestran en Buscar, Ofertas, Carrito ni en las demás páginas. Android mínimo: 7.0. / **Android**: the "TMP Calculadora" and "Glosario" buttons now appear only on the store's home page, not on Search, Offers, Cart or other pages. Minimum Android: 7.0.
+
 ## 1.2.1
 - **Glosario**: al recorrer los términos hacia abajo, la lista ya no se devuelve al primero. / **Glossary**: scrolling down through the terms no longer jumps back to the first one.
 

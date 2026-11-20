@@ -88,7 +88,14 @@
     (enLinea ? ["display:inline-flex", "position:static", "width:auto", "height:44px", "flex:none", "align-self:center", "margin:0", "padding:0", "border:0", "overflow:visible", "visibility:visible", "opacity:1", "transform:none"]
              : ["display:block", "position:static", "width:0", "height:0", "margin:0", "padding:0", "border:0", "overflow:visible", "visibility:visible", "opacity:1", "transform:none"]).forEach(function (d) { var k = d.split(":"); h.style.setProperty(k[0], k[1], "important"); });
   }
+  /* Los botones solo se muestran en el inicio de la tienda («/»); en Buscar, Ofertas, Carrito, colecciones y fichas se ocultan (y se cierra la ventana si estaba abierta). */
+  function esInicio() { return location.pathname === "/" || location.pathname === ""; }
   function posicionar() {
+    if (!esInicio()) {
+      if (actual) cerrar(actual, false);
+      hostB.style.setProperty("display", "none", "important");
+      return;
+    }
     var a = ancla();
     if (a && a.parentNode) {
       if (hostB.parentNode !== a.parentNode || hostB.nextSibling !== a) a.parentNode.insertBefore(hostB, a);

@@ -5,10 +5,10 @@ android {
     compileSdk { version = release(36) { minorApiLevel = 1 } }
     defaultConfig {
         applicationId = "cl.kotone.tumundopet"
-        minSdk = 21          // Android 5.0
+        minSdk = 24          // Android 7.0
         targetSdk = 36
-        versionCode = 4
-        versionName = "1.2.1"
+        versionCode = 5
+        versionName = "1.2.2"
     }
     sourceSets["main"].apply { manifest.srcFile("AndroidManifest.xml"); java.srcDirs("src"); res.srcDirs("res"); assets.srcDirs("assets") }
     buildTypes { release { isMinifyEnabled = false } }
